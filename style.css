@@ -51,6 +51,7 @@ a {
     grid-row:4;
     grid-column:1 /span 4;
     display:flex;
+    justify-content: space-around;
     /* flex-direction: column;
     align-items:flex-start; */
 }

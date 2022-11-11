@@ -54,9 +54,9 @@ checkPetStatus()
 }
 
 let lightPlusButton = document.querySelector(".lights-plus-button")
-lightPlusButton.addEventListener("click",lightsPlusOne)
+lightPlusButton.addEventListener("click",sleepertonPlusOne)
 
-function lightsPlusOne() {
+function sleepertonPlusOne() {
     if (pet.status.sleeperton !== 10){
 pet.status.sleeperton++
 petSleepertonText.innerHTML=pet.status.sleeperton
@@ -84,9 +84,11 @@ function startGame() {
     resetLights()
     birthPet()
     setInterval(() => {petAgeCount()},1000)
+    setInterval(() => {boredomPlusOne(), hungerPlusOne(), sleepertonPlusOne()}, 3000)
 }
 
 startButton.addEventListener("click",startGame)
+
 function petAgeCount(){
 pet.age++
 petAgeText.innerHTML = pet.age
