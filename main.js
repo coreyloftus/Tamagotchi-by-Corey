@@ -1,6 +1,6 @@
 const pet = {
     name:'Coco',
-    age: 999,
+    age: 0,
     status:{
         present:true,
         hunger: 0,
@@ -76,18 +76,26 @@ petHungerText.innerHTML=pet.status.hunger
 // ###################################
 // Button Event Listeners
 
-startButton.addEventListener("click",startTimer)
 resetButton.addEventListener("click",stopTimer)
-
 
 function startGame() {
     resetHunger()
     resetBoredom()
     resetLights()
     birthPet()
-    beginTimer()
-    checkPetStatus()
+    setInterval(() => {petAgeCount()},1000)
 }
+
+startButton.addEventListener("click",startGame)
+function petAgeCount(){
+pet.age++
+petAgeText.innerHTML = pet.age
+}
+
+// startTimer.addEventListener("click", function () {
+//     interval = setInterval(() => {
+//       count += 1;
+//       updateTicks(count); 
 
 feedButton.addEventListener("click",decreaseHunger)
 function decreaseHunger() {
@@ -163,14 +171,10 @@ function resetLights() {
 function birthPet() {
     console.log(`function ${birthPet} is not written yet`)
 }
-function startTimer () {
-    console.log(`function ${startTimer} is not written yet`)
-    
-}
+
 
 function stopTimer(){
     console.log(`function ${stopTimer} is not written yet`)
-
 }
 
 // ###################################
