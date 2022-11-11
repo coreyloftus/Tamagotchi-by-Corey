@@ -31,7 +31,7 @@ nav {
     grid-row:1;
     margin: 0 10px 0 10px;
 }
-.pet-avatar-box {
+.pet-status-box {
     background-color: whitesmoke;
     color:black;
     display:flex;
