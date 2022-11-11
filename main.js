@@ -1,30 +1,47 @@
-// getters
+// getters & setters
+
+// name and its area on the page
 let petName = 'Coco'
 let petNameText = document.querySelector(".petName")
 petNameText.innerHTML = petName;
 
+// pet age counter and its spot on the page
 let petAge = 999
 let petAgeText = document.querySelector('.petAge')
 petAgeText.innerHTML = petAge;
 
-let petHunger = 0
+// Hungry status and its button
+let petHunger = 10
 let petHungerText = document.querySelector('.petHunger')
 petHungerText.innerHTML = petHunger
+let feedButton = document.querySelector('.feed-button');
 
-let petSleeperton = 0
+// Sleepy status and its button
+let petSleeperton = 10
 let petSleepertonText = document.querySelector(".petSleeperton")
 petSleepertonText.innerHTML = petSleeperton
+let lightsButton = document.querySelector(".lights-button")
 
-let petBoredom = 0
+// Boredom Status and its button
+let petBoredom = 10
 let petBoredomText = document.querySelector(".petBoredom")
 petBoredomText.innerHTML = petBoredom
+let playButton = document.querySelector("play-button")
 
+// Pet Avatar's status and space
+let petAvatar = true
+let petAvatarBox = document.querySelector(".pet-avatar-box")
+petAvatarBox.innerHTML = petAvatar
 // gameStart(){ 
     // name pet - get from user
     // start timer
 // }
 
-// decreaseHunger()
+petHunger.addEventListener("click",decreaseHunger())
+decreaseHunger() => {
+    petHunger--;
+}
+
 // decreaseSleep()
 // decreaseBoredom()
 
