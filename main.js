@@ -12,11 +12,12 @@ const pet = {
         pet.hunger = 0
         pet.sleeperton = 0
         pet.boredom = 0
-        pet.present=true
+        pet.status.present=true
+        petStatusBox.innerHTML = pet.status.present
         pet.age = 0
         petAgeText.innerHTML = pet.age
-        petAgeCounter()
-        petNeeds()
+        petAgeCounter
+        petNeeds
     },
     }
 

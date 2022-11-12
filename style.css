@@ -37,9 +37,6 @@ a {
     grid-row:1;
     margin: 0 10px 0 10px;
 }
-.pet-status-bar p {
-    margin:5px 5px;
-}
 .pet-status-bar {
     grid-row:4;
     grid-column:1 /span 4;
@@ -49,6 +46,21 @@ a {
     flex-direction: column;
     flex-wrap: wrap;
     align-items:flex-start;
+}
+.pet-status-bar p {
+    margin:5px 5px;
+}
+.need-meter {
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.pet-need-bar {
+    background-color: gray;
+    width: 400px;
+    height: 16px;
+    justify-content: right;
+    justify-self: flex-end;
 }
 .pet-status-box {
     background-color: whitesmoke;

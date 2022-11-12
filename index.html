@@ -2,10 +2,18 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <script src="main.js" defer></script>
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="style.css" />
+    <script
+      src="main.js"
+      defer></script>
     <title>Tamagotchi by Corey</title>
   </head>
   <body>
@@ -16,15 +24,27 @@
     <div class="game-screen">
       <div class="game-status-bar">
         <p>Name: <span class="petName"></span></p>
-        <p>Age: <span class="petAge">petAge</span></p>
+        <p>Age: <span class="petAge"></span></p>
       </div>
       <div class="pet-status-bar">
-        <p>Hunger: <span class="petHunger">petHunger</span></p>
-        <p>
-          Sleepiness:
-          <span class="petSleeperton">petSleeperton</span>
-        </p>
-        <p>Boredom: <span class="petBoredom">petBoredom</span></p>
+        <div class="need-meter">
+          <p>Hunger</p>
+          <div
+            class="pet-need-bar"
+            id="pet-hunger-bar"></div>
+        </div>
+        <div class="need-meter">
+          <p>Sleepiness:</p>
+          <div
+            class="pet-need-bar"
+            id="pet-sleeperton-bar"></div>
+        </div>
+        <div class="need-meter">
+          <p>Boredom:</p>
+          <div
+            class="pet-need-bar"
+            id="pet-boredom-bar"></div>
+        </div>
       </div>
       <div class="pet-status-box">this is the petStatus box</div>
       <div class="game-actions-bar">
