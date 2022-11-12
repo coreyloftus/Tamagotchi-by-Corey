@@ -1,23 +1,32 @@
 const pet = {
-    name:'Coco',
+    name:'',
     age: 0,
     status:{
-        present:true,
+        present:false,
         hunger: 0,
         sleeperton: 0,
         boredom: 0,
+    }, birthPet() {
+        pet.name = prompt(`Please name your pet:`)
+        petNameText.innerHTML = pet.name;
+        pet.hunger = 0
+        pet.sleeperton = 0
+        pet.boredom = 0
+        pet.present=true
+        pet.age = 0
+        petAgeText.innerHTML = pet.age
+        petAgeCounter()
+        petNeeds()
+    },
     }
-}
 
 // getters & setters
 
     // name and its area on the page
     let petNameText = document.querySelector(".petName")
-    petNameText.innerHTML = pet.name;
 
     // pet age counter and its spot on the page
     let petAgeText = document.querySelector('.petAge')
-    petAgeText.innerHTML = pet.age;
 
     // Hungry status and its button
     let petHungerText = document.querySelector('.petHunger')
@@ -76,18 +85,22 @@ petHungerText.innerHTML=pet.status.hunger
 // ###################################
 // Button Event Listeners
 
+startButton.addEventListener("click",startGame)
 resetButton.addEventListener("click",stopTimer)
 
+let petNeeds = setInterval(() => {boredomPlusOne(), hungerPlusOne(), sleepertonPlusOne()}, 3000)
+let petAgeCounter = setInterval(() => {petAgeCount()},1000)
+
 function startGame() {
-    resetHunger()
-    resetBoredom()
-    resetLights()
-    birthPet()
-    setInterval(() => {petAgeCount()},1000)
-    setInterval(() => {boredomPlusOne(), hungerPlusOne(), sleepertonPlusOne()}, 3000)
+    pet.birthPet()
+    startButton.disabled = true;
+}
+function stopTimer() {
+clearInterval(petAgeCounter)
+clearInterval(petNeeds)
+startButton.disabled=false;
 }
 
-startButton.addEventListener("click",startGame)
 
 function petAgeCount(){
 pet.age++
@@ -172,11 +185,6 @@ function resetLights() {
 }
 function birthPet() {
     console.log(`function ${birthPet} is not written yet`)
-}
-
-
-function stopTimer(){
-    console.log(`function ${stopTimer} is not written yet`)
 }
 
 // ###################################
