@@ -13,28 +13,27 @@ const pet = {
         pet.name = prompt(`Please name your pet:`)
         petNameText.innerHTML = pet.name;
         pet.status.present=true
-        petStatusBox.innerHTML = pet.status.present
         pet.age = 0
         petAgeText.innerHTML = pet.age
-        petAgeCounter
-        petNeeds
+      
     },
     }
 
 //  timers, game start and end functions
 
-let petNeeds = setInterval(() => {boredomPlusOne(), hungerPlusOne(), sleepertonPlusOne()}, 3000)
-let petAgeCounter = setInterval(() => {petAgeCount()},1000)
-
 function startGame() {
     pet.birthPet()
-    startButton.disabled = true;
+    checkPetStatus()
+    let petNeeds = setInterval(() => {boredomPlusOne(), hungerPlusOne(), sleepertonPlusOne()}, 3000)
+    let petAgeCounter = setInterval(() => {petAgeCount()},1000)
+    startButton.disabled = true
+    resetButton.disabled = false
 }
-function stopTimer() {
+function stopTimer(startGame) {
 clearInterval(petAgeCounter)
 clearInterval(petNeeds)
-resetButton.disabled=true;
-startButton.disabled=false;
+resetButton.disabled=true
+startButton.disabled=false
 }
 
 function petAgeCount(){
@@ -56,6 +55,22 @@ function gameOver() {
         pet.status.present = false
         petStatusBox.innerHTML = `pet got le tired`
         stopTimer()
+    }
+}
+function checkPetStatus(){
+    if (pet.status.boredom ===0) {
+        playButton.disabled = true
+    } else if (pet.status.hunger === 0) {
+        feedButton.disabled = true
+    } else if (pet.status.sleeperton === 0) {
+        lightsButton.disabled = true
+    }
+    else if (pet.status.boredom === 10) {
+        gameOver()
+    } else if (pet.status.hunger === 10) {
+        gameOver()
+    } else if (pet.status.sleeperton === 10 ) {
+        gameOver()
     }
 }
 
@@ -92,6 +107,12 @@ function gameOver() {
     let startButton = document.querySelector(".start-button")
     let resetButton = document.querySelector(".reset-button")
 
+    // Load page with certain buttons disabled
+    playButton.disabled = true
+feedButton.disabled = true
+lightsButton.disabled = true
+resetButton.disabled = true
+
 // #################################
 // testing functions
 // REMOVE for final release
@@ -104,7 +125,6 @@ if (pet.status.boredom !== 10){
     playButton.disabled = false
     pet.status.boredom++
 petBoredomText.innerHTML=pet.status.boredom
-    // petBoredomBar
 }checkPetStatus()
 }
 
@@ -114,9 +134,9 @@ lightPlusButton.addEventListener("click",sleepertonPlusOne)
 function sleepertonPlusOne() {
     if (pet.status.sleeperton !== 10){
         lightsButton.disabled = false
-pet.status.sleeperton++
-petSleepertonText.innerHTML=pet.status.sleeperton
-} checkPetStatus()
+        pet.status.sleeperton++
+        petSleepertonText.innerHTML=pet.status.sleeperton
+    } checkPetStatus()
 }
 
 let feedPlusButton = document.querySelector(".feed-plus-button")
@@ -126,8 +146,10 @@ function hungerPlusOne() {
     if (pet.status.hunger !== 10) {
     feedButton.disabled = false
         pet.status.hunger++
-petHungerText.innerHTML=pet.status.hunger
-} checkPetStatus()
+    petHungerText.innerHTML=pet.status.hunger
+}
+// setNeedsBar(hunger)
+checkPetStatus()
 }
     
 // ###################################
@@ -144,19 +166,12 @@ function decreaseHunger() {
         feedButton.disabled = true
     } else {
         pet.status.hunger--
-        // shortenNeedsBar(hunger)
         petHungerText.innerHTML = pet.status.hunger
         checkPetStatus()
-    }}
-    
-    function shortenNeedsBar(needType) {
-        let barWidthCalc = pet.status[needType] - (pet.status[needType] * 40)
-        petBoredomBar.style.width = `${barWidthCalc}px`
-    }
-    function lengthenNeedsBar(needType) {
-        let barWidthCalc = pet.status[needType] * 40
-        petBoredomBar.style= `width:${barWidthCalc}px`
-    }
+        setNeedsBar(pet.status.hunger)
+    } 
+}
+   
     
     lightsButton.addEventListener("click",decreaseSleep)
     
@@ -179,22 +194,7 @@ function decreaseHunger() {
             } checkPetStatus()
         }
 
-        function checkPetStatus(){
-            if (pet.status.boredom ===0) {
-                playButton.disabled = true;
-            } else if (pet.status.hunger === 0) {
-                feedButton.disabled=true;
-            } else if (pet.status.sleeperton === 0) {
-                lightsButton.disabled=true;
-            }
-            else if (pet.status.boredom === 10) {
-                gameOver()
-            } else if (pet.status.hunger === 10) {
-                gameOver()
-            } else if (pet.status.sleeperton === 10 ) {
-                gameOver()
-            }
-        }
+    
        
         
 // ###################################
@@ -202,19 +202,23 @@ function decreaseHunger() {
 
 // needs Bars
 // function move() {
-//     const element = document.getElementById("myBar");   
-//     let width = 0;
-//     const id = setInterval(frame, 10);
+//     const element = document.getElementById("#pet-boredom-bar")   
+//     let width = 0
+//     const id = setInterval(frame, 10)
 //     function frame() {
 //       if (width == 100) {
-//         clearInterval(id);
+//         gameOver()
 //       } else {
-//         width++; 
-//         element.style.width = width + '%'; 
+//         width++
+//         element.style.width = width + '%'
 //       }
 //     }
 //   }
-
+ 
+// function setNeedsBar(needType) {
+    //     let barWidthCalc = (needType * 40)
+    //     petHungerBar.style.width = `${barWidthCalc}%`
+    // }
 
 function resetHunger() {
     console.log(`function ${resetHunger} is not written yet`)
@@ -229,8 +233,11 @@ function resetLights() {
 // ###################################
 
 // Pet Object status and space
-let petStatusBox = document.querySelector(".pet-status-box")
-petStatusBox.innerHTML = pet.status.present
+let petAvatarBox = document.querySelector(".pet-avatar-box")
+// if (pet.status.present === true) {
+//     petAvatarBox.className += "pet-avatar-basic"
+// }
+// petAvatarBox.innerHTML = pet.status.present
 
 
                 

@@ -24,7 +24,7 @@ a {
     height: 500px;
     background-color: rgba(255,255,255,.25);
     display:grid;
-    grid-template-rows: 10% 25% 20% 25% 20%;
+    grid-template-rows: 10% 25% 25% 25% 15%;
     grid-template-columns: 25% 25% 25% 25%;
 }
 .game-status-bar {
@@ -63,7 +63,8 @@ a {
     justify-self: flex-end;
 }
 #pet-hunger-bar {
-    width:0px;
+    width:50%;
+    background-color: white;
 }
 #pet-sleeperton-bar {
     width:0px;
@@ -71,19 +72,7 @@ a {
 #pet-boredom-bar {
     width:0px;
 }
-.pet-status-box {
-    background-color: whitesmoke;
-    color:black;
-    display:flex;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    text-align: center;
-    height: 200px;
-    width:250px;
-    grid-column: 2/span 4;
-    grid-row: 2/span 4;
-}
+
 span {
     color:goldenrod;
 }
@@ -111,6 +100,58 @@ span {
     grid-row:1;
 }
 
+.pet-avatar-box {
+    background-color: rgba(255,255,255,.35);
+    color:black;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height: 250px;
+    width:250px;
+    grid-column: 2/span 4;
+    grid-row: 2/span 4;
+}
+
+.pet-avatar-basic {
+background-color:white;
+width:50%;
+height:50%;
+border-radius: 20px;
+display:flex;
+justify-content: space-evenly;
+flex-flow: row nowrap;
+/* align-content: space-between; */
+}
+
+.pet-avatar-basic-eye {
+width:25%;
+height:25%;
+border: 1px solid black;
+border-radius: 40px;
+margin:20px;
+}
+#left-eye {
+width:65%;
+height:65%;
+border-radius: 90px;
+background-color: black;
+margin:7px 0px 0px 3px;
+}
+#right-eye {
+    width:65%;
+    height:65%;
+    border-radius: 90px;
+    background-color: black;
+    margin:7px 0px 0px 3px;
+}
+.pet-avatar-basic-mouth {
+    border-bottom: black solid 5px;
+    width:50%;
+    height:50%;
+    place-self: center;
+    align-self: center;
+    margin-right:10px;
+}
 .footer-contact-bar {
     display:flex;
     justify-content: space-evenly;
