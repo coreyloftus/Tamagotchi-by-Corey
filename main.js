@@ -15,7 +15,7 @@ const pet = {
         pet.status.present=true
         pet.age = 0
         petAgeText.innerHTML = pet.age
-      
+        
     },
     }
 
@@ -24,39 +24,52 @@ const pet = {
 function startGame() {
     pet.birthPet()
     checkPetStatus()
-    let petNeeds = setInterval(() => {boredomPlusOne(), hungerPlusOne(), sleepertonPlusOne()}, 3000)
+    let petNeeds = setInterval(() => {petNeedsPlus()}, 1000)
     let petAgeCounter = setInterval(() => {petAgeCount()},1000)
     startButton.disabled = true
-    resetButton.disabled = false
-}
-function stopTimer(startGame) {
-clearInterval(petAgeCounter)
-clearInterval(petNeeds)
-resetButton.disabled=true
-startButton.disabled=false
-}
+    // resetButton.disabled = false
+    petAvatarBox.style.display = 'flex'
+        }
+// function stopTimer(startGame) {
+// clearInterval(petAgeCounter)
+// clearInterval(petNeeds)
+// resetButton.disabled=true
+// startButton.disabled=false
+// }
 
 function petAgeCount(){
 pet.age++
 petAgeText.innerHTML = pet.age
 }
 
-function gameOver() {
-    if (pet.status.boredom === 10) {
-        pet.status.present = false
-        petStatusBox.innerHTML = `pet has peaced out to the movies`
-        stopTimer()
+// function boredomPlusOne() {
+    function petNeedsPlus() {
+    if (pet.status.boredom !== 10){
+        playButton.disabled = false
+        pet.status.boredom++
+        petBoredomText.innerHTML=pet.status.boredom
     }
-    else if (pet.status.hunger === 10) {
-        pet.status.present = false
-        petStatusBox.innerHTML = `pet went for thai food`
-        stopTimer()
-    } else if (pet.status.sleeperton === 10 ) {
-        pet.status.present = false
-        petStatusBox.innerHTML = `pet got le tired`
-        stopTimer()
+    if (pet.status.sleeperton !== 10){
+        lightsButton.disabled = false
+        pet.status.sleeperton++
+        petSleepertonText.innerHTML=pet.status.sleeperton
     }
-}
+    if (pet.status.hunger !== 10) {
+    feedButton.disabled = false
+        pet.status.hunger++
+        petHungerText.innerHTML=pet.status.hunger
+    }checkPetStatus()
+    }
+    
+// function sleepertonPlusOne() {
+//     } checkPetStatus()
+// }
+
+// function hungerPlusOne() {
+// }
+// checkPetStatus()
+// }
+
 function checkPetStatus(){
     if (pet.status.boredom ===0) {
         playButton.disabled = true
@@ -74,6 +87,27 @@ function checkPetStatus(){
     }
 }
 
+function gameOver() {
+    if (pet.status.boredom === 10) {
+    petBox.style.display = `none`
+    petAvatarBox.innerHTML = `pet has peaced out to the movies`
+    clearInterval(startGame(petAgeCounter))
+    clearInterval(startGame(petNeeds))
+}
+else if (pet.status.hunger === 10) {
+    petBox.style.display = `none`
+    petAvatarBox.innerHTML = `pet went for thai food`
+    clearInterval(petAgeCounter)
+    clearInterval(petNeeds)
+} else if (pet.status.sleeperton === 10 ) {
+        petBox.style.display = `none`
+        petAvatarBox.innerHTML = `pet got le tired`
+    clearInterval(petAgeCounter)
+    clearInterval(petNeeds)
+    }
+}
+
+
 // getters & setters
 
     // name and its area on the page
@@ -81,6 +115,9 @@ function checkPetStatus(){
 
     // pet age counter and its spot on the page
     let petAgeText = document.querySelector('.petAge')
+
+    // pet avatar area
+    let petBox = document.querySelector(`#pet-box`)
 
     // Hungry status and its button
     let petHungerText = document.querySelector('#petHunger')
@@ -109,55 +146,28 @@ function checkPetStatus(){
 
     // Load page with certain buttons disabled
     playButton.disabled = true
-feedButton.disabled = true
-lightsButton.disabled = true
-resetButton.disabled = true
+    feedButton.disabled = true
+    lightsButton.disabled = true
+    // resetButton.disabled = true // enable for debug only
 
 // #################################
 // testing functions
 // REMOVE for final release
     // Plus button getters
-let playPlusButton = document.querySelector(".play-plus-button")
-playPlusButton.addEventListener("click",boredomPlusOne)
+        // let playPlusButton = document.querySelector(".play-plus-button")
+        // playPlusButton.addEventListener("click",boredomPlusOne)
+        // let lightPlusButton = document.querySelector(".lights-plus-button")
+        // lightPlusButton.addEventListener("click",sleepertonPlusOne)
+        // let feedPlusButton = document.querySelector(".feed-plus-button")
+        // feedPlusButton.addEventListener("click",hungerPlusOne)
 
-function boredomPlusOne() {
-if (pet.status.boredom !== 10){
-    playButton.disabled = false
-    pet.status.boredom++
-petBoredomText.innerHTML=pet.status.boredom
-}checkPetStatus()
-}
 
-let lightPlusButton = document.querySelector(".lights-plus-button")
-lightPlusButton.addEventListener("click",sleepertonPlusOne)
-
-function sleepertonPlusOne() {
-    if (pet.status.sleeperton !== 10){
-        lightsButton.disabled = false
-        pet.status.sleeperton++
-        petSleepertonText.innerHTML=pet.status.sleeperton
-    } checkPetStatus()
-}
-
-let feedPlusButton = document.querySelector(".feed-plus-button")
-feedPlusButton.addEventListener("click",hungerPlusOne)
-
-function hungerPlusOne() {
-    if (pet.status.hunger !== 10) {
-    feedButton.disabled = false
-        pet.status.hunger++
-    petHungerText.innerHTML=pet.status.hunger
-}
-// setNeedsBar(hunger)
-checkPetStatus()
-}
     
 // ###################################
 // Button Event Listeners
 
 startButton.addEventListener("click",startGame)
-resetButton.addEventListener("click",stopTimer)
-
+// resetButton.addEventListener("click",stopTimer)
 
 // Feed Button listener and logic
 feedButton.addEventListener("click",decreaseHunger)
@@ -168,11 +178,9 @@ function decreaseHunger() {
         pet.status.hunger--
         petHungerText.innerHTML = pet.status.hunger
         checkPetStatus()
-        setNeedsBar(pet.status.hunger)
     } 
 }
    
-    
     lightsButton.addEventListener("click",decreaseSleep)
     
     function decreaseSleep() {
@@ -234,7 +242,6 @@ function resetLights() {
 
 // Pet Object status and space
 let petAvatarBox = document.querySelector(".pet-avatar-box")
-// if (pet.status.present === true) {
 //     petAvatarBox.className += "pet-avatar-basic"
 // }
 // petAvatarBox.innerHTML = pet.status.present
